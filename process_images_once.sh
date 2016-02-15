@@ -3,10 +3,10 @@
 # We will be running this script inside the visionai/clouddream Docker image
 # Copyright vision.ai, 2015
 
-cd /opt/deepdreamInside/inputs
+cd /opt/deepdream/inputs
 find . -type f -not -path '*/\.*' -print0 | while read -d $'\0' f;
 do
-    cd /opt/deepdreamInside
+    cd /opt/deepdream
     if [ -e outputs/${f} ];
     then
 	echo "File ${f} already processed"
