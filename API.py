@@ -2,25 +2,23 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request, send_from_directory
 from werkzeug.utils import secure_filename
-import threading
-import os
 import json
+import os
+from random import randint
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '/opt/deepdream/'
+"""
+/opt/deepdream/inputs/
+/home/shashank/PycharmProjects/DeepDream/inputs/
+"""
+UPLOAD_FOLDER = '/opt/deepdream/inputs/'
 ALLOWED_EXTENSIONS = set(['jpg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-class MyThread(threading.Thread):
-    
-    def run(self):
-        os.system("python deepdream.py")
-        
 
 @app.route('/upload/', methods=['GET','POST'])
 def index():
@@ -34,7 +32,7 @@ def index():
         d['maxwidth'] = 1000
     
         with open('settings.json', 'w') as file_data:
-	    json.dump(d, file_data)	
+            json.dump(d, file_data)
        
     if request.method == 'GET':
         html =  """
@@ -44,31 +42,44 @@ def index():
     <p>Types of layers: inception_3b/3x3_reduce  ,  inception_3a/3×3 , inception_4a/3×3_reduce , inception_4d/5×5 </p>
 
     <form action="" method=post enctype=multipart/form-data>
+    <h1>Enter Email Address</h1>
+    <p><input type=text name=text>
+    <h1>Upload image file</h1>
     <p> <input type=file name=file>
         <input type=submit value=Upload>
     </form>
+    <p> Your photo will be run on Deep Dream and sent back to you the email you provided. </p>
+    <p> This is because, processing on Deep Dream takes time and we do not want to keep you waiting </p>
+    <p> We will email you the photo once it is done </p>
+
                 """
         return html
 
     elif request.method == 'POST':
+        user_ID = str(randint(0,9999))
+        user_emailID = request.form['text']
+        user_textfile = open("userData.txt", "a")
+        user_textfile.write( "{}--{}\n".format(user_ID,user_emailID))
+        user_textfile.close()
+
         file = request.files['file']
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             main_file = filename.split('.')
-            main_file = "input" + "." + main_file[1]
-	    output_file = "output.jpg"
+            main_file = user_ID + "." + main_file[1]
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], main_file))
 
-            ##### TAKES TIME ##############
-            newThread = MyThread()
-	    newThread.start()
-            ###### NEEDS THREADING #######
+            html =  """
+                    <h1> Status </h1>
+                    <p> Your photo will be processed and sent to your email at {} </p>
+                    """.format(user_emailID)
 
-            return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               output_file)
+            return html
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
+
 
 
 
