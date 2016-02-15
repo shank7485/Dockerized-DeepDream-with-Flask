@@ -12,7 +12,7 @@ app = Flask(__name__)
 /opt/deepdream/inputs/
 /home/shashank/PycharmProjects/DeepDream/inputs/
 """
-UPLOAD_FOLDER = '/home/shashank/PycharmProjects/DeepDream/outputs/'
+UPLOAD_FOLDER = '/opt/deepdream/inputs/'
 ALLOWED_EXTENSIONS = set(['jpg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -22,32 +22,25 @@ def allowed_file(filename):
 
 @app.route('/upload/', methods=['GET','POST'])
 def index():
-    layer = request.args.get('layer')
-
-    d = {}
-
-    if layer != None:
- 
-        d['layer'] = layer
-        d['maxwidth'] = 1000
-    
-        with open('settings.json', 'w') as file_data:
-            json.dump(d, file_data)
-       
     if request.method == 'GET':
+
         html =  """
 
     <h1>Upload new File</h1>
-    <p>Pass query parameters also. IP/upload/?layer=""</p>
-    <p>Types of layers: inception_3b/3x3_reduce  ,  inception_3a/3×3 , inception_4a/3×3_reduce , inception_4d/5×5 </p>
+    <p>Types of layer Operations: </p>
+    <p>inception_3b/3x3_reduce, inception_3a/3×3, inception_4a/3×3_reduce, inception_4d/5×5 </p>
+    <p>inception_4d/5x5 etc </p>
 
     <form action="" method=post enctype=multipart/form-data>
     <h1>Enter Email Address</h1>
     <p><input type=text name=text>
+    <h1>Enter type of layer operation</h1>
+    <p><input type=text name=type>
     <h1>Upload image file</h1>
     <p> <input type=file name=file>
         <input type=submit value=Upload>
     </form>
+
     <p> Your photo will be run on Deep Dream and sent back to you the email you provided. </p>
     <p> This is because, processing on Deep Dream takes time and we do not want to keep you waiting </p>
     <p> We will email you the photo once it is done </p>
@@ -92,6 +85,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
-
-
-

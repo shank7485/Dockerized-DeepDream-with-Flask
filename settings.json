@@ -1,4 +1,4 @@
 {
     "maxwidth" : 400,
-    "layer" : "inception_4c/output"
+    "layer" : "inception_4d/3x3_reduce"
 }

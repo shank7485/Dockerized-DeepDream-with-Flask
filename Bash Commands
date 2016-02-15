@@ -1,0 +1,9 @@
+#3 separate containers
+#Uploader
+docker run -it --name deepdream-uploader -p 127.0.0.1:80:5000 -v `pwd`/deepdream:/opt/deepdream -d shank7485/v1 /bin/bash -c "cd /opt/deepdream && python API.py"
+
+#Computer
+docker run -it --name deepdream-compute -v `pwd`/deepdream:/opt/deepdream shank7485/v1 /bin/bash -c "cd /opt/deepdream && python checker_queue.py"
+
+#Emailer
+docker run -it --name deepdream-emailer -v `pwd`/deepdream:/opt/deepdream shank7485/v1 /bin/bash -c "cd /opt/deepdream && python output_email.py"

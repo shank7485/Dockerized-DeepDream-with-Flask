@@ -47,11 +47,12 @@ def find_newly_added(path):
 #Keeps adding newly added files into folder into Queue. Pops the queue and runs thread.
 def inputs_folder_checker(newest):
         while(True):
-            temp = find_newly_added("/home/shashank/PycharmProjects/DeepDream/outputs/")
+            temp = find_newly_added("/opt/deepdream/outputs/")
             if newest != temp:
                 newest = temp
                 waiting_list.put(newest)
                 file_path = waiting_list.get()
+		print file_path
                 file_name = (file_path.split("/")[-1]).split(".")[0] #Gives name of image.
                 thread.start_new_thread(mailer, (file_path, find_user_emailID(file_name), ))
 
@@ -67,5 +68,4 @@ def mailer(user_photo, user_emailID):
     mail(user_emailID, "Photo from Deep Dream", "Please find attached photo", user_photo)
     print "Mailed " + user_photo +" to "+ user_emailID
 
-inputs_folder_checker("/home/shashank/PycharmProjects/DeepDream/outputs/")
-
+inputs_folder_checker("/opt/deepdream/outputs/")

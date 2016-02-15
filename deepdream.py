@@ -8,6 +8,7 @@ from IPython.display import clear_output, Image, display
 from google.protobuf import text_format
 
 import caffe
+import sys
 
 
 def showarray(a, fmt='jpeg'):
@@ -136,3 +137,5 @@ def main(input_image_path):
     #    frame = nd.affine_transform(frame, [1-s,1-s,1], [h*s/2,w*s/2,0], order=1)
     #    frame_i += 1
 
+path = sys.argv[1]
+main(str(path))
