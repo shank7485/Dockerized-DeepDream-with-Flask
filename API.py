@@ -12,7 +12,7 @@ app = Flask(__name__)
 /opt/deepdream/inputs/
 /home/shashank/PycharmProjects/DeepDream/inputs/
 """
-UPLOAD_FOLDER = '/opt/deepdream/inputs/'
+UPLOAD_FOLDER = '/home/shashank/PycharmProjects/DeepDream/outputs/'
 ALLOWED_EXTENSIONS = set(['jpg'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -58,9 +58,22 @@ def index():
     elif request.method == 'POST':
         user_ID = str(randint(0,9999))
         user_emailID = request.form['text']
+
+        dct = {user_ID: user_emailID}
+
+        with open('userData.json', 'r') as user_jsonfile:
+            data = json.load(user_jsonfile)
+
+        data.update(dct)
+
+        with open('userData.json', 'w') as user_jsonfile:
+            json.dump(data, user_jsonfile)
+
+        """
         user_textfile = open("userData.txt", "a")
         user_textfile.write( "{}--{}\n".format(user_ID,user_emailID))
         user_textfile.close()
+        """
 
         file = request.files['file']
 
@@ -79,7 +92,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
-
 
 
 
