@@ -13,17 +13,23 @@ DeepDream is a computer vision program created by Google which uses a convolutio
   It contains pre complied dependancies to run deepdream. Get the image by doing [docker             pull](https://docs.docker.com/engine/reference/commandline/pull/) bash command. 
 * Once the image is downloaded, clone this repository. Once that is done, 'cd' into clone folder. This is needed as scripts   mount the current directory into the containers. The 3 containers as shown in the diagram can be started by, 
   Starting deepdream-uploader:
+
   ```
   sudo docker run -it --name deepdream-uploader -p 127.0.0.1:80:5000 -v `pwd`/deepdream:/opt/deepdream -d shank7485/v1 /bin/bash -c "cd /opt/deepdream && python API.py"
   ```
+  
   Starting deepdream-compute:
+  
   ```
   sudo docker run -it --name deepdream-compute -v `pwd`/deepdream:/opt/deepdream shank7485/v1 /bin/bash -c "cd /opt/deepdream && python checker_queue.py"
   ```
+  
   Starting deepdream-emailer:
+  
   ```
   sudo docker run -it --name deepdream-emailer -v `pwd`/deepdream:/opt/deepdream shank7485/v1 /bin/bash -c "cd /opt/deepdream && python output_email.py"
   ```
+  
   Use separate tabs to run the above commands. 
 * Before uploading images into deepdream, edit the [output_email.py]() to update your email ID and password. 
 * Once that is done, browse to localhost/upload/ URL in your browser and upload the image to be 'deepdreamed'.
