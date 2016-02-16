@@ -10,7 +10,12 @@ DeepDream is a computer vision program created by Google which uses a convolutio
 
 ### Instructions:
 * The docker image here is based from the compiled images provided by [Vision.AI](https://github.com/VISIONAI/clouddream)
-  It contains pre complied dependancies to run deepdream. Get the image by doing [docker             pull](https://docs.docker.com/engine/reference/commandline/pull/) bash command. 
+  It contains pre complied dependancies to run deepdream. Some libraries like python-Flask are committed to this base image. The new    image can be downloaded by doing [docker pull](https://docs.docker.com/engine/reference/commandline/pull/) bash command. 
+
+  ```
+  docker pull shank7485/deep-dream-with-flask
+  ```
+  
 * Once the image is downloaded, clone this repository. Then 'cd' into the cloned folder. All commands have to be run 
   from this path. This is necessary as scripts will mount the working current directory into the containers as volumes. The   3 containers as shown in the diagram can be started by,
 
