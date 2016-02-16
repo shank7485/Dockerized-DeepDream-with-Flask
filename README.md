@@ -44,7 +44,7 @@ DeepDream is a computer vision program created by Google which uses a convolutio
   the performance of the CPU on which deepdream is done. 
 
 ### Credits:
-This setup is based on the work done by [Vision.AI](https://vision.ai/). The instructions followed to write this setup are based on the details provided at https://github.com/VISIONAI/clouddream
+This setup is based on the work done by [Vision.AI](https://vision.ai/). The instructions followed to code this setup are based on the details provided at https://github.com/VISIONAI/clouddream
 
 ### Issues:
 It is necessary to keep a "white.jpg" in the input and output directories and to have atleast one entry in the userData.json before starting the setup. This is necessary as the folder scanners need atleast one file to work smoothly. Hence, I have included a dummy image in input and output folder and an entry with respect to this dummy image is kept in the userData.json.
