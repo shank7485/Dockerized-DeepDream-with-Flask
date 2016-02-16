@@ -28,14 +28,13 @@ def index():
 
     <h1>Upload new File</h1>
     <p>Types of layer Operations: </p>
-    <p>inception_3b/3x3_reduce, inception_3a/3×3, inception_4a/3×3_reduce, inception_4d/5×5 </p>
-    <p>inception_4d/5x5 etc </p>
+    <p>inception_3b/3x3_reduce, inception_3b/3x3</p>
+    <p>inception_4b/3x3, inception_4b/3x3_reduce</p>
+    <p>inception_4b/5x5_reduce, inception_4b/5x5</p>
 
     <form action="" method=post enctype=multipart/form-data>
     <h1>Enter Email Address</h1>
     <p><input type=text name=text>
-    <h1>Enter type of layer operation</h1>
-    <p><input type=text name=type>
     <h1>Upload image file</h1>
     <p> <input type=file name=file>
         <input type=submit value=Upload>
@@ -79,6 +78,7 @@ def index():
             html =  """
                     <h1> Status </h1>
                     <p> Your photo will be processed and sent to your email at {} </p>
+		    <p><a href="/upload/">BACK</a></p>
                     """.format(user_emailID)
 
             return html
