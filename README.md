@@ -22,19 +22,19 @@ DeepDream is a computer vision program created by Google which uses a convolutio
   Starting deepdream-uploader:
 
   ```
-  sudo docker run -it --name deepdream-uploader -p 127.0.0.1:80:5000 -v `pwd`/deepdream:/opt/deepdream -d shank7485/v1 /bin/bash -c "cd /opt/deepdream && python API.py"
+  sudo docker run -it --name deepdream-uploader -p 127.0.0.1:80:5000 -v `pwd`/deepdream:/opt/deepdream -d shank7485/deep-dream-with-flask /bin/bash -c "cd /opt/deepdream && python API.py"
   ```
   
   Starting deepdream-compute:
   
   ```
-  sudo docker run -it --name deepdream-compute -v `pwd`/deepdream:/opt/deepdream shank7485/v1 /bin/bash -c "cd /opt/deepdream && python checker_queue.py"
+  sudo docker run -it --name deepdream-compute -v `pwd`/deepdream:/opt/deepdream shank7485/deep-dream-with-flask /bin/bash -c "cd /opt/deepdream && python checker_queue.py"
   ```
   
   Starting deepdream-emailer:
   
   ```
-  sudo docker run -it --name deepdream-emailer -v `pwd`/deepdream:/opt/deepdream shank7485/v1 /bin/bash -c "cd /opt/deepdream && python output_email.py"
+  sudo docker run -it --name deepdream-emailer -v `pwd`/deepdream:/opt/deepdream shank7485/deep-dream-with-flask /bin/bash -c "cd /opt/deepdream && python output_email.py"
   ```
   
   Use separate tabs to run the above commands. 
