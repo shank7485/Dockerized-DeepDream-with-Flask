@@ -1,6 +1,6 @@
 # Dockerized deepdream as a Cloud service with Python Flask
 
-DeepDream is a computer vision program created by Google which uses a convolutional neural network to find and enhance patterns in images. It looks for patterns in images and it writes back the patterns it finds back on top to the processed image. 
+DeepDream is a computer vision program created by Google which uses a convolutional neural network to find and enhance patterns in images. It looks for patterns in images and writes back the patterns it finds back on top to the processed image. 
 
 ### Before and After:
 ![Shashank](https://raw.githubusercontent.com/shank7485/DeepDream-with-Flask/master/Other/combine_images.jpg)
@@ -11,7 +11,8 @@ DeepDream is a computer vision program created by Google which uses a convolutio
 ### Instructions:
 * The docker image here is based from the compiled images provided by [Vision.AI](https://github.com/VISIONAI/clouddream)
   It contains pre complied dependancies to run deepdream. Get the image by doing [docker             pull](https://docs.docker.com/engine/reference/commandline/pull/) bash command. 
-* Once the image is downloaded, clone this repository. Once that is done, 'cd' into clone folder. This is needed as scripts   mount the current directory into the containers. The 3 containers as shown in the diagram can be started by, 
+* Once the image is downloaded, clone this repository. 'cd' into the cloned folder. This is needed as scripts mount the current directory into the containers. The 3 containers as shown in the diagram can be started by, 
+
   Starting deepdream-uploader:
 
   ```
@@ -31,7 +32,7 @@ DeepDream is a computer vision program created by Google which uses a convolutio
   ```
   
   Use separate tabs to run the above commands. 
-* Before uploading images into deepdream, edit the [output_email.py]() to update your email ID and password. 
+* Before uploading images into deepdream, edit the [output_email.py](https://raw.githubusercontent.com/shank7485/DeepDream-with-Flask/master/deepdream/output_email.py) to update your email ID and password. 
 * Once that is done, browse to localhost/upload/ URL in your browser and upload the image to be 'deepdreamed'.
 * You will receive your deepdreamed photo to the email address which was specified. This will take some time depending on
   the processor performance. 
