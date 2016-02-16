@@ -4,6 +4,7 @@ import os
 import Queue
 #import thread
 import subprocess
+import json
 
 waiting_list = Queue.Queue()
 
@@ -33,7 +34,16 @@ def inputs_folder_checker(newest):
             if newest != temp:
                 newest = temp
                 waiting_list.put(newest)
-                subprocess.call(['python', 'deepdream.py', waiting_list.get()])
+                file_path = waiting_list.get()
+                file_name = (file_path.split("/")[-1]).split(".")[0]
+                user_details = find_user_details(file_name)
+                subprocess.call(['python', 'deepdream.py', file_path, user_details[1], str(user_details[2]), ])
+
+def find_user_details(userID):
+    with open('userData.json', 'r') as user_jsonfile:
+        data = json.load(user_jsonfile)
+    return data[userID]
+
 
 inputs_folder_checker("/opt/deepdream/inputs/")
 

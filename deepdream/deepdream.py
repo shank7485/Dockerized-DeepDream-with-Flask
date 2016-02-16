@@ -84,10 +84,7 @@ def deepdream(net, base_img, iter_n=10, octave_n=4, octave_scale=1.4, end='incep
     return deprocess(net, src.data[0])
 
 
-def main(input_image_path):
-    with open("settings.json") as json_file:
-        json_data = json.load(json_file)
-    # print()
+def main(input_image_path, layer_type, width):
 
     model_path = '../caffe/models/bvlc_googlenet/'  # substitute your path here
     net_fn = model_path + 'deploy.prototxt'
@@ -108,7 +105,7 @@ def main(input_image_path):
 
 
 
-    maxwidth = json_data['maxwidth']
+    maxwidth = width
     img = PIL.Image.open(input_image_path)  # Need python script to give latest added image to feed to this.(path)
     width = img.size[0]
 
@@ -122,7 +119,7 @@ def main(input_image_path):
     frame = img
     # frame_i = 0
 
-    frame = deepdream(net, frame, end=json_data['layer'])
+    frame = deepdream(net, frame, end=layer_type)
     # frame = deepdream(net, img, end='inception_3b/5x5_reduce')
     # frame = deepdream(net, img, end='conv2/3x3')
 
@@ -138,4 +135,7 @@ def main(input_image_path):
     #    frame_i += 1
 
 path = sys.argv[1]
-main(str(path))
+type = sys.argv[2]
+width = sys.argv[3]
+
+main(str(path), str(type), int(width))

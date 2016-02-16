@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo docker stop deepdream-uploader deepdream-compute deepdream-emailer && sudo docker rm deepdream-uploader deepdream-compute deepdream-emailer

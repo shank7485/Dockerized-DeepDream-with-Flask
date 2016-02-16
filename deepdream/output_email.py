@@ -11,8 +11,8 @@ from email.mime.text import MIMEText
 from email import encoders
 
 waiting_list = Queue.Queue()
-gmail_user = ""
-gmail_pwd = ""
+gmail_user = "" #Enter Email ID 
+gmail_pwd = ""  #Enter Password
 
 #Mails to user.
 def mail(to, subject, text, attach):
@@ -52,7 +52,6 @@ def inputs_folder_checker(newest):
                 newest = temp
                 waiting_list.put(newest)
                 file_path = waiting_list.get()
-		print file_path
                 file_name = (file_path.split("/")[-1]).split(".")[0] #Gives name of image.
                 thread.start_new_thread(mailer, (file_path, find_user_emailID(file_name), ))
 
@@ -60,7 +59,7 @@ def inputs_folder_checker(newest):
 def find_user_emailID(userID):
     with open('userData.json', 'r') as user_jsonfile:
             data = json.load(user_jsonfile)
-    return data[userID]
+    return data[userID][0]
 
 #Mails to user the new photo.
 def mailer(user_photo, user_emailID):
