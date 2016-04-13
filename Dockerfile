@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
 
+# Editied from original Dockerfile from source.
 
 ENV PYTHONPATH /opt/caffe/python
 
@@ -98,10 +99,12 @@ RUN ldconfig
 RUN cd /opt/caffe && \
   (pip install -r python/requirements.txt) && \
   (pip install python-flask)
+  
 #
 #
 #
 # Added Flask dependencies above from original Dockerfile
+#
 #
 #
 
